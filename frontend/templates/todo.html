@@ -1,125 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO Page</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-        .todo-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
+      .todo-container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
 
-        h1 {
-            text-align: center;
-            color: #007BFF;
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
+      h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
 
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+      }
 
-        input:focus, textarea:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
+      input:focus,
+      textarea:focus {
+        border-color: #007bff;
+        outline: none;
+      }
 
-        textarea {
-            resize: none;
-            height: 120px;
-        }
+      textarea {
+        resize: none;
+        height: 120px;
+      }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-        button:hover {
-            background-color: #0056b3;
-        }
-        .error {
-            color: red;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-align: center;
-            background-color: #f8d7da;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid red;
-          }
-          .success {
-            color: green;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-align: center;
-            background-color: #d4edda;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid green;
-          }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .error {
+        color: red;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #f8d7da;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid red;
+      }
+      .success {
+        color: green;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #d4edda;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid green;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="todo-container">
-        <h1>Add TODO Item</h1>
-        {% if error %}
+      <h1>Add TODO Item</h1>
+      {% if error %}
       <div class="error">{{ error }}</div>
-    {% endif %}
-    
-    {% if message %}
+      {% endif %} {% if message %}
       <div class="success">{{ message }}</div>
-    {% endif %}
-        <form action="/submit_todo" method="POST">
-            <label for="item-name">Item Name:</label>
-            <input type="text" id="item-name" name="title" placeholder="Enter the item name" required>
+      {% endif %}
+      <form action="/submit_todo" method="POST">
+        <label for="item-name">Item Name:</label>
+        <input
+          type="text"
+          id="item-name"
+          name="title"
+          placeholder="Enter the item name"
+          required
+        />
 
-            <label for="item-description">Item Description:</label>
-            <textarea id="item-description" name="description" placeholder="Enter the item description" required></textarea>
+        <label for="item-description">Item Description:</label>
+        <textarea
+          id="item-description"
+          name="description"
+          placeholder="Enter the item description"
+          required
+        ></textarea>
+        <label for="item-id">Item ID:</label>
+<input type="text" id="item-id" name="item-id" required>
 
-            <button type="submit">Add Item</button>
-        </form>
+        <button type="submit">Add Item</button>
+      </form>
     </div>
-
-</body>
+  </body>
 </html>
