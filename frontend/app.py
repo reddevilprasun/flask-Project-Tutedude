@@ -26,5 +26,9 @@ def get_users():
     users = response.json()
     return render_template('users.html', users=users)
 
+@app.route('/todo')
+def todo():
+    return render_template('todo.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000',debug=True)
