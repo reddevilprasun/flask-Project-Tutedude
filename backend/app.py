@@ -9,6 +9,7 @@ load_dotenv()
 client = MongoClient(os.getenv('MONGO_URL'))
 db = client['flask-app']
 users = db['users']
+todos = db['todos']
 
 app = Flask(__name__)
 
@@ -50,6 +51,22 @@ def get_users():
     for user in users_list:
         user['_id'] = str(user['_id'])
     return jsonify(users_list)
+
+@app.route('/submittodoitem', methods=['POST'])
+def submit_todo_item():
+    data = request.json
+    title = data.get('title')
+    description = data.get('description')
+    if not title or not description:
+       return 'Please fill all fields'
+    try:
+       todos.insert_one({
+           'title': title,
+           'description': description
+       })
+       return jsonify({'message': 'Todo item created successfully'}), 201
+    except Exception as e:
+       return jsonify({'message': 'An error occurred'}), 500
 
 
 
