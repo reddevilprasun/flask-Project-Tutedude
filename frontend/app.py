@@ -30,5 +30,13 @@ def get_users():
 def todo():
     return render_template('todo.html')
 
+@app.route('/submit_todo', methods=['POST'])
+def submit_todo():
+    response = requests.post(f'{BACKEND_URL}/submittodoitem', json=request.form)
+    if response.status_code != 201:
+        error_message = response.json().get('message')
+        return render_template('todo.html', error=error_message)
+    return render_template('todo.html', message='Todo item added successfully')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000',debug=True)

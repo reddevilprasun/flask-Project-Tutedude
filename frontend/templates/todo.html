@@ -77,13 +77,41 @@
         button:hover {
             background-color: #0056b3;
         }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid red;
+          }
+          .success {
+            color: green;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid green;
+          }
     </style>
 </head>
 <body>
 
     <div class="todo-container">
         <h1>Add TODO Item</h1>
-        <form>
+        {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    
+    {% if message %}
+      <div class="success">{{ message }}</div>
+    {% endif %}
+        <form action="/submit_todo" method="POST">
+            {% csrf_token %}
             <label for="item-name">Item Name:</label>
             <input type="text" id="item-name" name="item-name" placeholder="Enter the item name" required>
 
